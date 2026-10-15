@@ -96,10 +96,10 @@ function useRoster(props: RosterProps) {
     avatars.hostConnected();
     return () => avatars.hostDisconnected();
   });
+  const cached = createMemo(() => cachedRosterCards(host()));
   const cards = createMemo(() => {
-    const cached = cachedRosterCards(host());
-    if (cached) {
-      return avatars.withActiveRoutes(() => cached);
+    if (cached()) {
+      return avatars.withActiveRoutes(() => cached()!);
     }
     avatarRevision();
     const currentCards = snapshot().cards;
