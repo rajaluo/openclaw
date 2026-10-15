@@ -58,7 +58,7 @@ it("redacts unresolved connection SecretRefs", async () => {
   };
   await expect(
     runWorkboardPortTask({ operation: "preflight", config, probe: false }, scope),
-  ).rejects.toThrow("preflight: workboard:");
+  ).rejects.toThrow("preflight: workboard, team-reports:");
 });
 
 it.skipIf(!connection)(
