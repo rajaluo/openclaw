@@ -3,18 +3,17 @@
 import { afterEach, describe, expect, it, onTestFinished, vi } from "vitest";
 import { createOverlay } from "../../../components/overlay-lifecycle.ts";
 import { settleTooltip, tooltipSurface } from "../../../components/tooltip.test-support.ts";
-import { settleWebAwesome } from "../../../test-helpers/web-awesome.ts";
 import {
   afterModalHidden,
   getRenderedModalDialog,
   installDialogPolyfill,
 } from "../../../test-helpers/modal-dialog.ts";
+import { settleWebAwesome } from "../../../test-helpers/web-awesome.ts";
 import "../../../components/modal-dialog.ts";
 import { closeChatPaneDetails } from "../chat-pane-shared.ts";
 import {
   bindChatPickerOverlay,
   installChatComposerPickerDismissal,
-  handleChatComposerDetailsToggle,
   handleChatComposerDropdownShow,
   markPointerOpenedChatComposerDropdown,
   restorePointerOpenedChatComposerTrigger,
@@ -387,10 +386,6 @@ describe("chat picker overlay", () => {
     document.body.append(composer);
 
     effortPicker.open = true;
-    effortPicker.addEventListener("toggle", handleChatComposerDetailsToggle);
-    onTestFinished(() =>
-      effortPicker.removeEventListener("toggle", handleChatComposerDetailsToggle),
-    );
     effortPicker.dispatchEvent(new Event("toggle"));
     effortControl.focus();
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
